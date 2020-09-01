@@ -1,0 +1,19 @@
+{
+  "name": "expo-junior",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caceres97/Expo-Junior.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caceres97/Expo-Junior/issues"
+  },
+  "homepage": "https://github.com/caceres97/Expo-Junior#readme"
+}

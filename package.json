@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/caceres97/Expo-Junior/issues"
   },
-  "homepage": "https://github.com/caceres97/Expo-Junior#readme"
+  "homepage": "https://github.com/caceres97/Expo-Junior#readme",
+  "dependencies": {
+    "mysql": "^2.18.1"
+  }
 }

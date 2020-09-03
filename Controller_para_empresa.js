@@ -4,6 +4,7 @@ var oApp = express();
 var oMyConnection = mysql.createConnection({
    host: '127.0.0.1',
    user: 'root',
+   port: "3306",
    password: '1234',
      database: 'negocios'   
 });
@@ -73,6 +74,24 @@ sSQLUpdate = " WHERE idnegocio = '" + Datanegocio.idnegocio + "'";
       oResponse.end();
     }
   });
+}
+function Readnegocio(oResponse) {
+  var sSQLRead = "SELECT * FROM negocio";
+  oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
+    if(oError) {
+      oResponse.write(JSON.stringify({
+        error: true,
+        error_object: oError
+      }));
+      oResponse.end();
+    } else {
+      oResponse.write(JSON.stringify({
+        error: false,
+        data: oRows
+      }));
+      oResponse.end();            
+    }    
+  });    
 }
 
 oApp.post('/negocio', function(oReq, oRes) {

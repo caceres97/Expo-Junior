@@ -8,7 +8,6 @@ var oMyConnection = mysql.createConnection({
      database: 'negocios'   
 });
 
-
 function Createnegocio(Datanegocio, oResponse) {  
   var sSQLCreate = "INSERT INTO negocio (id_negocio, nombre_del_negocio, servicio_o_producto, teléfono, correo_electrónico, contraseña, dirección, last_updated) VALUES (NULL, ";
   sSQLCreate += "'" + Datanegocio.nombre_del_negocio + "', ";
@@ -75,3 +74,39 @@ sSQLUpdate = " WHERE idnegocio = '" + Datanegocio.idnegocio + "'";
     }
   });
 }
+
+oApp.post('/negocio', function(oReq, oRes) {
+  var oDataOP = {};
+  var sOP = '';
+  
+  oDataOP = oReq.body.data_op;
+  sOP = oReq.body.op;
+  
+  switch(sOP) {
+    
+    case 'CREATE':      
+     Createnegocio(oDataOP, oRes);
+    break;
+    
+    case 'READ':
+     Readnegocio(oRes);
+    break;
+    
+    case 'UPDATE':
+     Updatenegocio(oDataOP, oRes);
+    break;
+    
+    case 'DELETE':
+     Deletenegocio(oDataOP, oRes);
+    break;
+    
+    default:
+     oRes.write(JSON.stringify({ 
+       error: true, 
+       error_message: 'Debes proveer los datos solicitados' 
+     }));
+     oRes.end();
+    break;
+    
+  }   
+});

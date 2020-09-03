@@ -50,7 +50,7 @@ function UpdateUser(DataUser, oResponse) {
     sSQLUpdate += " AND contraseña = '" + DataUser.contraseña + "' ";    
   }    
   sSQLUpdate = " WHERE idUser = '" + DataUser.idUser + "'";
-  
+
   oMyConnection.query(sSQLUpdate, function(oErrUpdate, oRowsUpdate, oColsUpdate) {
     if(oErrUpdate) {
       oResponse.write(JSON.stringify({ 
@@ -66,3 +66,58 @@ function UpdateUser(DataUser, oResponse) {
     }
   });
 }
+
+function ReadUser(oResponse) {
+    var sSQLRead = "SELECT * FROM User";
+    oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
+      if(oError) {
+        oResponse.write(JSON.stringify({
+          error: true,
+          error_object: oError
+        }));
+        oResponse.end();
+      } else {
+        oResponse.write(JSON.stringify({
+          error: false,
+          data: oRows
+        }));
+        oResponse.end();            
+      }    
+    });    
+  }
+  
+oApp.post('/User', function(oReq, oRes) {
+    var oDataOP = {};
+    var sOP = '';
+    
+    oDataOP = oReq.body.data_op;
+    sOP = oReq.body.op;
+    
+    switch(sOP) {
+      
+      case 'CREATE':      
+       CreateUser(oDataOP, oRes);
+      break;
+      
+      case 'READ':
+       ReadUser(oRes);
+      break;
+      
+      case 'UPDATE':
+       UpdateUser(oDataOP, oRes);
+      break;
+      
+      case 'DELETE':
+       DeleteUser(oDataOP, oRes);
+      break;
+      
+      default:
+       oRes.write(JSON.stringify({ 
+         error: true, 
+         error_message: 'Debes proveer los datos solicitados' 
+       }));
+       oRes.end();
+      break;
+      
+    }   
+  });

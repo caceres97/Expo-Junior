@@ -94,6 +94,40 @@ function Readnegocio(oResponse) {
   });    
 }
 
+function Deletenegocio(oDatanegocio, oResponse) {
+  var sSQLDelete = "DELETE FROM negocio WHERE idnegocio = '" + oDatanegocio.idnegocio + "'";
+  oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
+    if(oErrDelete) {
+      oResponse.write(JSON.stringify({
+        error: true,
+        error_object: oErrDelete
+      }));
+      oResponse.end();
+    } else {
+      oResponse.write(JSON.stringify({
+        error: false
+      }));
+      oResponse.end();      
+    }    
+  });  
+}
+
+oApp.get('/negocio', function(oReq, oRes) {
+  var sSQLGetAll = "SELECT * FROM negocio";
+  oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
+    if(oError) {
+      oRes.write(JSON.stringify({
+        error: true,
+        error_object: oError         
+      }));
+      oRes.end();
+    } else {
+      oRes.write(JSON.stringify(oRows));
+      oRes.end();       
+    }
+  });
+});
+
 oApp.post('/negocio', function(oReq, oRes) {
   var oDataOP = {};
   var sOP = '';
@@ -128,4 +162,8 @@ oApp.post('/negocio', function(oReq, oRes) {
     break;
     
   }   
+});
+
+oApp.listen(3000, function(oReq, oRes) {
+  console.log("Servicios para negocio corriendo en puerto 3000");   
 });

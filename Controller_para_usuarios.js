@@ -87,6 +87,40 @@ function ReadUser(oResponse) {
     });    
   }
   
+  function DeleteUser(oDataUser, oResponse) {
+    var sSQLDelete = "DELETE FROM User WHERE idUser = '" + oDataUser.idUser + "'";
+    oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
+      if(oErrDelete) {
+        oResponse.write(JSON.stringify({
+          error: true,
+          error_object: oErrDelete
+        }));
+        oResponse.end();
+      } else {
+        oResponse.write(JSON.stringify({
+          error: false
+        }));
+        oResponse.end();      
+      }    
+    });  
+  }
+
+  oApp.get('/User', function(oReq, oRes) {
+    var sSQLGetAll = "SELECT * FROM User";
+    oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
+      if(oError) {
+        oRes.write(JSON.stringify({
+          error: true,
+          error_object: oError         
+        }));
+        oRes.end();
+      } else {
+        oRes.write(JSON.stringify(oRows));
+        oRes.end();       
+      }
+    });
+ });
+
 oApp.post('/User', function(oReq, oRes) {
     var oDataOP = {};
     var sOP = '';
@@ -121,4 +155,8 @@ oApp.post('/User', function(oReq, oRes) {
       break;
       
     }   
+  });
+
+  oApp.listen(3000, function(oReq, oRes) {
+    console.log("Servicios para Usuario corriendo en puerto 3000");   
   });

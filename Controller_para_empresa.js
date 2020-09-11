@@ -6,17 +6,19 @@ var oMyConnection = mysql.createConnection({
    user: 'root',
    port: "3306",
    password: '1234',
-     database: 'negocios'   
+     database: 'make_it_yours'   
 });
 
-function Createnegocio(Datanegocio, oResponse) {  
-  var sSQLCreate = "INSERT INTO negocio (id_negocio, nombre_del_negocio, servicio_o_producto, teléfono, correo_electrónico, contraseña, dirección, last_updated) VALUES (NULL, ";
-  sSQLCreate += "'" + Datanegocio.nombre_del_negocio + "', ";
-  sSQLCreate += "'" + Datanegocio.servicio_o_producto + "', ";
-  sSQLCreate += "'" + Datanegocio.teléfono + "', ";
-  sSQLCreate += "'" + Datanegocio.correo_electrónico + "', ";
-  sSQLCreate += "'" + Datanegocio.contraseña + "', ";
-  sSQLCreate += "'" + Datanegocio.dirección + "', ";
+function Createempresa(Dataempresa, oResponse) {  
+  var sSQLCreate = "INSERT INTO empresa (id_empresa, nombre_de_empresa, foto, descripcion, telefono_celular, direccion_en_link, hora_de_apertura, hora_de_cierre, dias_habiles, last_updated) VALUES (NULL, ";
+  sSQLCreate += "'" + Dataempresa.nombre_de_empresa + "', ";
+  sSQLCreate += "'" + Dataempresa.foto + "', ";
+  sSQLCreate += "'" + Dataempresa.descripcion + "', ";
+  sSQLCreate += "'" + Dataempresa.telefono_celular + "', ";
+  sSQLCreate += "'" + Dataempresa.direccion_en_link + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_apertura + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_cierre + "', ";
+  sSQLCreate += "'" + Dataempresa.dias_habiles + "', ";
   sSQLCreate += "NOW())";
     
   oMyConnection.query(sSQLCreate, function(oError, oRows, oCols) {
@@ -37,29 +39,35 @@ function Createnegocio(Datanegocio, oResponse) {
   });
 }
 
-function Updatenegocio(Datanegocio, oResponse) {
-  var sSQLUpdate = "UPDATE negocio SET last_updated = NOW() ";
-  if(Datanegocio.hasOwnProperty('nombre_del_negocio')) {
-    sSQLUpdate += " AND nombre_del_negocio = '" + Datanegocio.nombre_del_negocio + "' ";
+function Updateempresa(Dataempresa, oResponse) {
+  var sSQLUpdate = "UPDATE empresa SET last_updated = NOW() ";
+  if(Dataempresa.hasOwnProperty('nombre_de_empresa')) {
+    sSQLUpdate += " AND nombre_de_empresa = '" + Dataempresa.nombre_de_empresa + "' ";
   }
-  if(Datanegocio.hasOwnProperty('servicio_o_producto')) {
-    sSQLUpdate += " AND servicio_o_producto = '" + Datanegocio.servicio_o_producto + "' ";
+  if(Dataempresa.hasOwnProperty('foto')) {
+    sSQLUpdate += " AND foto = '" + Dataempresa.foto + "' ";
   }
-  if(Datanegocio.hasOwnProperty('teléfono')) {
-    sSQLUpdate += " AND teléfono = '" + Datanegocio.teléfono + "' ";
+  if(Dataempresa.hasOwnProperty('descripcion')) {
+    sSQLUpdate += " AND descripcion = '" + Dataempresa.descripcion + "' ";
   }
-  if(Datanegocio.hasOwnProperty('correo_electrónico')) {
-    sSQLUpdate += " AND correo_electrónico = '" + Datanegocio.correo_electrónico + "' ";
+  if(Dataempresa.hasOwnProperty('telefono_celular')) {
+    sSQLUpdate += " AND telefono_celular = '" + Dataempresa.telefono_celular + "' ";
   }
-  if(Datanegocio.hasOwnProperty('contraseña')) {
-    sSQLUpdate += " AND contraseña = '" + Datanegocio.contraseña + "' ";    
+  if(Dataempresa.hasOwnProperty('direccion_en_link')) {
+    sSQLUpdate += " AND direccion_en_link = '" + Dataempresa.direccion_en_link + "' ";    
   }    
-  sSQLUpdate = " WHERE idnegocio = '" + Datanegocio.idnegocio + "'";
+  sSQLUpdate = " WHERE idempresa = '" + Dataempresa.idempresa + "'";
 }
-if(Datanegocio.hasOwnProperty('dirección')) {
-  sSQLUpdate += " AND dirección = '" + Datanegocio.dirección + "' ";    
-    
-sSQLUpdate = " WHERE idnegocio = '" + Datanegocio.idnegocio + "'";
+if(Dataempresa.hasOwnProperty('hora_de_apertura')) {
+  sSQLUpdate += " AND hora_de_apertura = '" + Dataempresa.hora_de_apertura + "' ";    
+}
+if(Dataempresa.hasOwnProperty('hora_de_cierre')) {
+  sSQLUpdate += " AND hora_de_cierre = '" + Dataempresa.hora_de_cierre + "' ";
+}
+if(Dataempresa.hasOwnProperty('dias_habiles')) {
+  sSQLUpdate += " AND dias_habiles= '" + Dataempresa.dias_habiles + "' ";
+sSQLUpdate = " WHERE idempresa = '" + Dataempresa.idempresa + "'";
+
   oMyConnection.query(sSQLUpdate, function(oErrUpdate, oRowsUpdate, oColsUpdate) {
     if(oErrUpdate) {
       oResponse.write(JSON.stringify({ 
@@ -75,8 +83,8 @@ sSQLUpdate = " WHERE idnegocio = '" + Datanegocio.idnegocio + "'";
     }
   });
 }
-function Readnegocio(oResponse) {
-  var sSQLRead = "SELECT * FROM negocio";
+function Readempresa(oResponse) {
+  var sSQLRead = "SELECT * FROM empresa";
   oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
     if(oError) {
       oResponse.write(JSON.stringify({
@@ -94,8 +102,8 @@ function Readnegocio(oResponse) {
   });    
 }
 
-function Deletenegocio(oDatanegocio, oResponse) {
-  var sSQLDelete = "DELETE FROM negocio WHERE idnegocio = '" + oDatanegocio.idnegocio + "'";
+function Deleteempresa(oDataempresa, oResponse) {
+  var sSQLDelete = "DELETE FROM empresa WHERE idempresa = '" + oDataempresa.idempresa + "'";
   oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
     if(oErrDelete) {
       oResponse.write(JSON.stringify({
@@ -112,8 +120,8 @@ function Deletenegocio(oDatanegocio, oResponse) {
   });  
 }
 
-oApp.get('/negocio', function(oReq, oRes) {
-  var sSQLGetAll = "SELECT * FROM negocio";
+oApp.get('/empresa', function(oReq, oRes) {
+  var sSQLGetAll = "SELECT * FROM empresa";
   oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
     if(oError) {
       oRes.write(JSON.stringify({
@@ -128,7 +136,7 @@ oApp.get('/negocio', function(oReq, oRes) {
   });
 });
 
-oApp.post('/negocio', function(oReq, oRes) {
+oApp.post('/empresas', function(oReq, oRes) {
   var oDataOP = {};
   var sOP = '';
   
@@ -138,19 +146,19 @@ oApp.post('/negocio', function(oReq, oRes) {
   switch(sOP) {
     
     case 'CREATE':      
-     Createnegocio(oDataOP, oRes);
+     Createempresa(oDataOP, oRes);
     break;
     
     case 'READ':
-     Readnegocio(oRes);
+     Readempresa(oRes);
     break;
     
     case 'UPDATE':
-     Updatenegocio(oDataOP, oRes);
+     Updateempresa(oDataOP, oRes);
     break;
     
     case 'DELETE':
-     Deletenegocio(oDataOP, oRes);
+     Deleteempresa(oDataOP, oRes);
     break;
     
     default:
@@ -165,5 +173,5 @@ oApp.post('/negocio', function(oReq, oRes) {
 });
 
 oApp.listen(3000, function(oReq, oRes) {
-  console.log("Servicios para negocio corriendo en puerto 3000");   
+  console.log("Servicios para empresa corriendo en puerto 3000");   
 });

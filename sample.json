@@ -1,0 +1,18 @@
+[
+    {
+        "id_animal": "1",
+        "especie_animal": "gato",
+        "raza_animal": "angora",
+        "usuario": "Michelle",
+        "estado_animal": "patita fracturada"
+        
+    },
+    {
+        "id_animal": "2",
+        "especie_animal": "perro",
+        "raza_animal": "pitbull",
+        "usuario": "Brenda",
+        "estado_animal": "lesión en la cola"
+        
+    }
+]

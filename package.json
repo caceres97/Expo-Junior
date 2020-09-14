@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon controllers-formulario.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/caceres97/Expo-Junior/issues"
   },
-  "homepage": "https://github.com/caceres97/Expo-Junior#readme"
+  "homepage": "https://github.com/caceres97/Expo-Junior#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.4",
+    "underscore": "^1.11.0"
+  },
+  "devDependencies": {},
+  "keywords": []
 }

@@ -6,7 +6,7 @@ var oMyConnection = mysql.createConnection({
    user: 'root',
    port: "3306",
    password: '1234',
-     database: 'make_it_yours'   
+     database: 'make_it_yours_salones'   
 });
 
 function Createempresa(Dataempresa, oResponse) {  
@@ -120,7 +120,7 @@ function Deleteempresa(oDataempresa, oResponse) {
   });  
 }
 
-oApp.get('/empresa', function(oReq, oRes) {
+oApp.get('/empresas/salones', function(oReq, oRes) {
   var sSQLGetAll = "SELECT * FROM empresa";
   oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
     if(oError) {
@@ -136,7 +136,7 @@ oApp.get('/empresa', function(oReq, oRes) {
   });
 });
 
-oApp.post('/empresas', function(oReq, oRes) {
+oApp.post('/empresas/salones', function(oReq, oRes) {
   var oDataOP = {};
   var sOP = '';
   

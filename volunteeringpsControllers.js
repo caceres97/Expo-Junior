@@ -1,19 +1,19 @@
 const { Router, response } = require ("express");
 
 class VolunteeringpsController {
-    router = Router ();
+    router = Router();
 
     constructor() {
         this.getvolunteeringps();
-        this.createvolunteeringps();
+        //this.createvolunteeringps();
 }
-};
+
 
 getvolunteeringps = () => {
-    this.router.get("/volunteeringps:code", (request, response) => {
+    this.router.get("/volunteeringps/:code", (request, response) => {
       var code = request.params.code;
-      var volunteeringps = {},
-      var statusCode = 200,
+      var volunteeringps = {};
+      var statusCode = 200;
 
       if (code == "07GESA") {
         volunteeringps = {
@@ -51,6 +51,6 @@ getvolunteeringps = () => {
 });
      
 };
-  
-const volunteeringpsRouter = new volunteeringpsControllers();
-module.export = volunteeringpsRouter.router;
+}
+const volunteeringpsRouter = new VolunteeringpsController();
+module.export = volunteeringpsRouter;

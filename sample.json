@@ -1,18 +1,26 @@
 [
-    {
-        "id_animal": "1",
-        "especie_animal": "gato",
-        "raza_animal": "angora",
-        "usuario": "Michelle",
-        "estado_animal": "patita fracturada"
-        
-    },
-    {
-        "id_animal": "2",
-        "especie_animal": "perro",
-        "raza_animal": "pitbull",
-        "usuario": "Brenda",
-        "estado_animal": "lesión en la cola"
-        
-    }
+  {
+    "id": "1",
+    "especie_animal": "gato",
+    "raza_animal": "angora",
+    "usuario": "Michelle",
+    "estado_animal": "patita fracturada",
+    "fecha": ""
+  },
+  {
+    "id": "2",
+    "especie_animal": "perro",
+    "raza_animal": "pitbull",
+    "usuario": "Brenda",
+    "estado_animal": "lesión en la cola",
+    "fecha": ""
+  },
+  {
+    "id": "3",
+    "especie_animal": "perro",
+    "raza_animal": "chihuahua",
+    "usuario": "Jc",
+    "estado_animal": "quemaduras",
+    "fecha": ""
+  }
 ]

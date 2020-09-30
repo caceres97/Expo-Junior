@@ -10,5 +10,15 @@ router.get("/test",(req,res) =>{
     };
     res.json(datapet);
 });
+router.get("/test",(req,res) =>{
+    var dataOng = {
+        "nombre_Ong": "Huellitas",
+        "Cuentabancaria": "",
+        "misiom": "",
+        "vision": "",
+        "Descripcion": ""
+    };
+    res.json(dataOng);
+});
 
 module.exports = router;

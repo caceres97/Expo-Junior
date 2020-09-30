@@ -1,5 +1,5 @@
-const   Controller_para_empresa_comidas = require("./Controllers/Controller_para_empresa_comidas");
-const Controller_para_empresa_salones = require("./Controllers/Controller_para_empresa_salones");
+const   Controller_para_empresa_comidas = require("./Controllers.js/Controller_para_empresa_comidas");
+const Controller_para_empresa_salones = require("./Controllers.js/Controller_para_empresa_salones");
 const express = require("express");
 const app = express();
 

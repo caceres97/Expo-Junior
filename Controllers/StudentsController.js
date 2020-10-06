@@ -58,11 +58,3 @@ class StudentsController {
 
 const studentsRouter = new StudentsController();
 module.exports = studentsRouter.router;
-
-/ -> Raiz Principal
-
-/students -> Primer nivel
-/students/juniors/grades?age=2020 -> Segundo nivel
-
-
-/businesses -> Primer nivel

@@ -23,7 +23,7 @@ getvolunteeringps = () => {
       } else if (code == "01TESA") {
         volunteeringps = {
         "name": "TECHO El Salvador",
-        "contacto": "7429 7484",
+        "contacto": "erick.hernandez@techo.org",
         };
       } else if (code == "07FDSESA") {
         volunteeringps = {
@@ -52,5 +52,6 @@ getvolunteeringps = () => {
      
 };
 }
+
 const volunteeringpsRouter = new VolunteeringpsController();
-module.export = volunteeringpsRouter;
+module.exports = volunteeringpsRouter.router;

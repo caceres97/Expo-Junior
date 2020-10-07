@@ -1,56 +1,42 @@
-const { Router, response } = require ("express");
-
+const { Router } = require("express");
+const { Client } = require("@mysql.js/mysql");
 class VolunteeringpsController {
-    router = Router();
+  router = Router();
+  config = {
+    host: "179.51.60.189",
+    port: "3306",
+    user: "root",
+    password: "dRJkHctJyq1tdB",
+    database: "wordpress",
+  }
+  constructor() {
+    this.getvolunteeringps();
+    //this.createvolunteeringps();
+  };
 
-    constructor() {
-        this.getvolunteeringps();
-        //this.createvolunteeringps();
 }
 
-
-getvolunteeringps = () => {
-    this.router.get("/volunteeringps/:code", (request, response) => {
-      var code = request.params.code;
-      var volunteeringps = {};
-      var statusCode = 200;
-
-      if (code == "07GESA") {
-        volunteeringps = {
-          "name": "Glasswing internacional",
-          "contacto": "nloucel@glasswing.org",
-        };
-      } else if (code == "01TESA") {
-        volunteeringps = {
-        "name": "TECHO El Salvador",
-        "contacto": "erick.hernandez@techo.org",
-        };
-      } else if (code == "07FDSESA") {
-        volunteeringps = {
-          "name": "Fabrica de sonrisas",
-          "contacto": "fds.es.info@gmail.com",
-      };
-      } else if (code == "90FTESA") {
-      volunteeringps = {
-        "name": "Fusate",
-        "contacto": "info@fusate.org",
-      };
-      } else if (code == "20LDIESA") {
-      volunteeringps = {
-        "name": "Fusate",
-        "contacto": "kromero@ldielsalvador.org",
-      };
-     } else {
-      volunteeringps = {
-        "name": "Not found",
-      };
-      statusCode = 404;
-
-      response.status(200).send(volunteeringps)
-  };
-});
-     
-};
+  getvolunteeringps = () => {
+    this.router.get("/:code", (request, response) => {
+      (async () => {
+        //Aplicamos la configuracion
+        const client = new Client(config);
+        //Metemos el resultado en variables
+        const { results, fields } = await client.query(
+          `SELECT * FROM volunteeringps where id = ${code}`
+        );
+    
+        if (results !== []) {
+          response.status(200).send(results[0]);
+        } else {
+          
+          response.status(404).send({
+            message: "programa de voluntariado no encontrado",
+          });
+        }
+        await client.end();
+      })().catch(console.error);
+    });
 }
 
 const volunteeringpsRouter = new VolunteeringpsController();

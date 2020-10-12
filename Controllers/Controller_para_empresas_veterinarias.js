@@ -1,5 +1,6 @@
 var express = require('express');
 var mysql = require('mysql');
+<<<<<<< HEAD
 var empresa = express(); 
 var oMyConnection = mysql.createConnection({
   host: '35.226.221.48',
@@ -53,6 +54,47 @@ Createempresa = () => {
 };
 
 
+=======
+var oApp = express(); 
+var oMyConnection = mysql.createConnection({
+   host: '127.0.0.1',
+   user: 'root',
+   port: "3306",
+   password: '1234',
+     database: 'make_it_yours_veterinarias'   
+});
+
+function Createempresa(Dataempresa, oResponse) {  
+  var sSQLCreate = "INSERT INTO empresa (id_empresa, nombre_de_empresa, foto, descripcion, telefono_celular, direccion_en_link, hora_de_apertura, hora_de_cierre, dias_habiles, last_updated) VALUES (NULL, ";
+  sSQLCreate += "'" + Dataempresa.nombre_de_empresa + "', ";
+  sSQLCreate += "'" + Dataempresa.foto + "', ";
+  sSQLCreate += "'" + Dataempresa.descripcion + "', ";
+  sSQLCreate += "'" + Dataempresa.telefono_celular + "', ";
+  sSQLCreate += "'" + Dataempresa.direccion_en_link + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_apertura + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_cierre + "', ";
+  sSQLCreate += "'" + Dataempresa.dias_habiles + "', ";
+  sSQLCreate += "NOW())";
+    
+  oMyConnection.query(sSQLCreate, function(oError, oRows, oCols) {
+    if(oError) {
+      oResponse.write(JSON.stringify({
+        error: true,
+        error_object: oError
+      }));
+      oResponse.end();      
+    } else {
+      var iIDCreated = oRows.insertId;
+      oResponse.write(JSON.stringify({
+        error: false,
+        idCreated: iIDCreated
+      }));
+      oResponse.end();      
+    }    
+  });
+}
+
+>>>>>>> 004adc1371a2435752c7e4e36f73d6f400cde159
 function Updateempresa(Dataempresa, oResponse) {
   var sSQLUpdate = "UPDATE empresa SET last_updated = NOW() ";
   if(Dataempresa.hasOwnProperty('nombre_de_empresa')) {
@@ -134,6 +176,7 @@ function Deleteempresa(oDataempresa, oResponse) {
   });  
 }
 
+<<<<<<< HEAD
 getempresa = () => {
   this.router.get("/empresas/veterinarias", (request, response) => {
     (async () => {
@@ -154,6 +197,25 @@ getempresa = () => {
 };
 
 empresa.post('/empresas/veterinarias', function(oReq, oRes) {
+=======
+oApp.get('/empresas/veterinarias', function(oReq, oRes) {
+  var sSQLGetAll = "SELECT * FROM empresa";
+  oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
+    if(oError) {
+      oRes.write(JSON.stringify({
+        error: true,
+        error_object: oError         
+      }));
+      oRes.end();
+    } else {
+      oRes.write(JSON.stringify(oRows));
+      oRes.end();       
+    }
+  });
+});
+
+oApp.post('/empresas/veterinarias', function(oReq, oRes) {
+>>>>>>> 004adc1371a2435752c7e4e36f73d6f400cde159
   var oDataOP = {};
   var sOP = '';
   
@@ -189,6 +251,10 @@ empresa.post('/empresas/veterinarias', function(oReq, oRes) {
   }   
 });
 
+<<<<<<< HEAD
 empresa.listen(3000, function(oReq, oRes) {
+=======
+oApp.listen(3000, function(oReq, oRes) {
+>>>>>>> 004adc1371a2435752c7e4e36f73d6f400cde159
   console.log("Servicios para empresa corriendo en puerto 3000");   
 });

@@ -2,6 +2,7 @@ var express = require('express');
 var mysql = require('mysql');
 var oApp = express(); 
 var oMyConnection = mysql.createConnection({
+<<<<<<< HEAD
   host: '35.226.221.48',
   user: 'test',
   port: "3306",
@@ -30,6 +31,26 @@ function Createempresa(Dataempresa, oResponse) {
   //sSQLCreate += "'" + Dataempresa.hora_de_cierre + "', ";
   //sSQLCreate += "'" + Dataempresa.dias_habiles + "', ";
  // sSQLCreate += "NOW())";
+=======
+   host: '127.0.0.1',
+   user: 'root',
+   port: "3306",
+   password: '1234',
+     database: 'make_it_yours_clinicas'   
+});
+
+function Createempresa(Dataempresa, oResponse) {  
+  var sSQLCreate = "INSERT INTO empresa (id_empresa, nombre_de_empresa, foto, descripcion, telefono_celular, direccion_en_link, hora_de_apertura, hora_de_cierre, dias_habiles, last_updated) VALUES (NULL, ";
+  sSQLCreate += "'" + Dataempresa.nombre_de_empresa + "', ";
+  sSQLCreate += "'" + Dataempresa.foto + "', ";
+  sSQLCreate += "'" + Dataempresa.descripcion + "', ";
+  sSQLCreate += "'" + Dataempresa.telefono_celular + "', ";
+  sSQLCreate += "'" + Dataempresa.direccion_en_link + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_apertura + "', ";
+  sSQLCreate += "'" + Dataempresa.hora_de_cierre + "', ";
+  sSQLCreate += "'" + Dataempresa.dias_habiles + "', ";
+  sSQLCreate += "NOW())";
+>>>>>>> 004adc1371a2435752c7e4e36f73d6f400cde159
     
   oMyConnection.query(sSQLCreate, function(oError, oRows, oCols) {
     if(oError) {
@@ -130,6 +151,7 @@ function Deleteempresa(oDataempresa, oResponse) {
   });  
 }
 
+<<<<<<< HEAD
 getempresa = () => {
   this.router.get("/empresas/clinicas", (request, response) => {
     (async () => {
@@ -148,6 +170,23 @@ getempresa = () => {
     })().catch(console.error);
   });
 };
+=======
+oApp.get('/empresas/clinicas', function(oReq, oRes) {
+  var sSQLGetAll = "SELECT * FROM empresa";
+  oMyConnection.query(sSQLGetAll, function(oError, oRows, oCols) {
+    if(oError) {
+      oRes.write(JSON.stringify({
+        error: true,
+        error_object: oError         
+      }));
+      oRes.end();
+    } else {
+      oRes.write(JSON.stringify(oRows));
+      oRes.end();       
+    }
+  });
+});
+>>>>>>> 004adc1371a2435752c7e4e36f73d6f400cde159
 
 oApp.post('/empresas/clinicas', function(oReq, oRes) {
   var oDataOP = {};

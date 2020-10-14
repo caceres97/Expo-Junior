@@ -2,14 +2,16 @@ var express = require('express');
 var mysql = require('mysql');
 var empresa = express(); 
 var oMyConnection = mysql.createConnection({
-  host: '35.226.221.48',
-  user: 'test',
+  host: '192.168.1.179',
+  user: 'pomaadmin',
   port: "3306",
-  password: '123456',
-    database: 'make_it_yours'   
+  password: 'sup3r@T3',
+    database: 'make_it_yours'  
 });
 
-constructor() ; {
+class ControllerEmpresasSalones {
+  
+  constructor() {
   this.getempresa()
   this.Createempresa()
   this.Updateempresa()
@@ -53,8 +55,7 @@ Createempresa = () => {
 };
 
 
-
-function Updateempresa(Dataempresa, oResponse) {
+Updateempresa = (Dataempresa, oResponse) => {
   var sSQLUpdate = "UPDATE empresa SET last_updated = NOW() ";
   if(Dataempresa.hasOwnProperty('nombre_de_empresa')) {
     sSQLUpdate += " AND nombre_de_empresa = '" + Dataempresa.nombre_de_empresa + "' ";
@@ -189,7 +190,6 @@ empresa.post('/empresas/salones', function(oReq, oRes) {
     
   }   
 });
-
 empresa.listen(3000, function(oReq, oRes) {
   console.log("Servicios para empresa corriendo en puerto 3000");   
 });

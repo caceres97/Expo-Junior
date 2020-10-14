@@ -2,11 +2,11 @@ var express = require('express');
 var mysql = require('mysql');
 var oApp = express(); 
 var oMyConnection = mysql.createConnection({
-  host: '35.226.221.48',
-  user: 'test',
+  host: '192.168.1.179',
+  user: 'pomaadmin',
   port: "3306",
-  password: '123456',
-    database: 'make_it_yours'   
+  password: 'sup3r@T3',
+    database: 'make_it_yours' 
 });
 
 constructor() ; {

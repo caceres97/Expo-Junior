@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon controlers.js"
+    "dev": "nodemon src/index.js"
+    
   },
   "repository": {
     "type": "git",
@@ -18,7 +19,10 @@
   "homepage": "https://github.com/caceres97/Expo-Junior#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "morgan": "^1.10.0",
+    "morgan": "^1.10.0"
+  },
+  "keywords": [],
+  "devDependencies": {
     "nodemon": "^2.0.4"
   }
 }

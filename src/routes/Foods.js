@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     const { food, price, username }= req.body;
     if (food & price & username){
-        res.json('saved');
+        res.send('saved');
     } else {
         res.send('Wrong Request');
     }

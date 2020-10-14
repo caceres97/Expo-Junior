@@ -2,13 +2,10 @@
     {
         "id": "1",
 
-        "offerts": "Pupusas",
+        "food": "Pupusas",
 
-        "fastfood": "Enchiladas"
-    }
-   , {
-        "id": "2",
-        "offerts": "Hamburgers",
-        "fastfood": "Tostadas"
+        "price": "Enchiladas",
+
+        "username": "Hugo"
     }
 ]

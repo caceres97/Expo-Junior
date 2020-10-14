@@ -1,0 +1,14 @@
+[
+    {
+        "id": "1",
+
+        "offerts": "Pupusas",
+
+        "fastfood": "Enchiladas"
+    }
+   , {
+        "id": "2",
+        "offerts": "Hamburgers",
+        "fastfood": "Tostadas"
+    }
+]

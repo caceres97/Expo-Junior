@@ -1,56 +1,64 @@
-const { Router, response } = require ("express");
+const { Router, response } = require("express");
 
 class VolunteeringpsController {
-    router = Router();
+  router = Router();
 
-    constructor() {
-        this.getvolunteeringps();
-        //this.createvolunteeringps();
-}
+  config = {
+    host: "192.168.1.179",
+    port: "3306",
+    user: "pomaadmin",
+    password: "Sup3r@te",
+    database: "wordpress",
+  };
+
+  constructor() {
+    this.getvolunteeringps();
+    this.createvolunteeringps();
+  }
 
 
-getvolunteeringps = () => {
-    this.router.get("/volunteeringps/:code", (request, response) => {
-      var code = request.params.code;
-      var volunteeringps = {};
+  getvolunteeringps = () => {
+    this.router.get("/:code", (request, response) => {
+      // var code = request.params.code;
+      //var volunteeringps = {};
+      //var statusCode = 200;
+      (async () => {
+
+        const client = new Client(config);
+
+        const { results, fields } = await client.query(
+          `SELECT * FROM volunteeringps where id = ${code}`
+        );
+        if (results !== []) {
+          response.status(200).send(results[0]);
+        } else {
+          response.status(404).send({
+            message: "programa de voluntariado no encontrado",
+          });
+        }
+        await client.end();
+      })().catch(console.error);
+    });
+  };
+
+  createvolunteeringps = () => {
+    this.router.post("/volumteeringps", (request, response) => {
+      var volunteeringps = request.body;
       var statusCode = 200;
 
-      if (code == "07GESA") {
-        volunteeringps = {
-          "name": "Glasswing internacional",
-          "contacto": "nloucel@glasswing.org",
-        };
-      } else if (code == "01TESA") {
-        volunteeringps = {
-        "name": "TECHO El Salvador",
-        "contacto": "7429 7484",
-        };
-      } else if (code == "07FDSESA") {
-        volunteeringps = {
-          "name": "Fabrica de sonrisas",
-          "contacto": "fds.es.info@gmail.com",
-      };
-      } else if (code == "90FTESA") {
-      volunteeringps = {
-        "name": "Fusate",
-        "contacto": "info@fusate.org",
-      };
-      } else if (code == "20LDIESA") {
-      volunteeringps = {
-        "name": "Fusate",
-        "contacto": "kromero@ldielsalvador.org",
-      };
-     } else {
-      volunteeringps = {
-        "name": "Not found",
-      };
-      statusCode = 404;
-
-      response.status(200).send(volunteeringps)
+      (async () => {
+        const client = new Client(config);
+        const { result, fields } = await client.query(
+          `INSERT INTO volunteeringps (name, contact)
+      VALUES ("${volunteeringps.name}", "${volunteeringps.contact}"`);
+        response.status(statusCode).send({
+          message: "Programa de voluntariado agregado con exito"
+        });
+        await client.end();
+      })().catch(console.error);
+    });
   };
-});
-     
-};
 }
+
 const volunteeringpsRouter = new VolunteeringpsController();
-module.export = volunteeringpsRouter;
+module.exports = volunteeringpsRouter.router;

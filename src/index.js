@@ -1,9 +1,8 @@
 const {Router} = require ("express");
-
 const router = Router ();
 router.get("/test",(req,res) =>{
 
-    var volunteer = {
+    var datavolunteer = {
 
         "user":"Geremy", 
         "age": "17",
@@ -12,7 +11,7 @@ router.get("/test",(req,res) =>{
         "email": "geremy.castro2021@poma.superate.org.sv"
     };
 
-    res.json(volunteer);
+    res.json(datavolunteer);
 
 });
 

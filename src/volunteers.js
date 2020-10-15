@@ -1,13 +1,12 @@
 
 const { Router } = require("express");
-
 const router = Router();
 
 //const _ = require("underscore");
 
-const volunteer = require("../volunteers.json");
+const volunteers = require("../volunteers.json");
 
-console.log(volunteer);
+console.log(volunteers);
 
 router.get("/volunteers", (req, res) => {
 
@@ -19,44 +18,24 @@ router.get("/volunteers", (req, res) => {
 
 router.post("/volunteers", (req, res) => {
 
-  //var { especieanimal, razaanimal, usuario, estadoanimal, fecha } = req.body;
+  var { user, age,gender,city, email} = req.body;
 
-  //if (especieanimal && razaanimal && usuario && estadoanimal && fecha) {
+  if (user && age && gender && city && email) {
 
-   // var id = pets.length + 1;
+    var id = volunteers.length + 1;
 
-    //var newReport = { ...req.body, id };
+    var addvolunteer = { ...req.body, id };
 
-   // pets.push(newReport);
+   volunteers.push(addvolunteer);
 
-    //res.json(pets);
+    res.json(volunteers);
 
-  //} else {
+  } else {
 
-    //res.send("Wrong Request");
+    res.send("no ha rellenado la informacion solicitada");
 
-  //}
-
-//});
-
-
-
-router.delete("/pets/:id",(req,res) =>{
-
-  const {id} = req.body;
-
-  _.each (pets ,(pet,i)=>{
-
-if (pets.id == id) {
-
-  pets.splice(i,1);
-
-};
-
-  });
-
-  res.send(pets);
+  }
 
 });
 
-  (module.exports = router)
+  (module.exports = router);

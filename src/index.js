@@ -1,21 +1,20 @@
-const express = require(`express`);
-const app = express();
-// const morgan = require(`morgan`);
+const {Router} = require ("express");
 
-// settings 
-app.set(`port`, process.env.PORT || 3000);
+const router = Router ();
+router.get("/test",(req,res) =>{
 
-// middlewares
-// app.use(morgan(`dev`));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+    var volunteer = {
 
-// routes
-app.get(`/`, (req, res) => {
-    res.send(`Hello World`);
+        "user":"Geremy", 
+        "age": "17",
+        "gender": "Male",
+        "city": "Santa Tecla", 
+        "email": "geremy.castro2021@poma.superate.org.sv"
+    };
+
+    res.json(volunteer);
+
 });
 
-// starting the server
-app.listen(3000, () => {
-    console.log("Server on port");
-});
+
+module.exports = router;

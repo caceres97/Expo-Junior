@@ -18,7 +18,7 @@ constructor() ; {
   this.postempresa()
 }
 
-function Createempresa(Dataempresa, oResponse) {  
+ Createempresa =(Dataempresa, oResponse) => {  
   var sSQLCreate = "Select  * From Customers";
   //var sSQLCreate = "INSERT INTO empresa (id_empresa, nombre_de_empresa, foto, descripcion, telefono_celular, direccion_en_link, hora_de_apertura, hora_de_cierre, dias_habiles, last_updated) VALUES (NULL, ";
   //sSQLCreate += "'" + Dataempresa.nombre_de_empresa + "', ";
@@ -49,7 +49,7 @@ function Createempresa(Dataempresa, oResponse) {
   });
 }
 
-function Updateempresa(Dataempresa, oResponse) {
+ Updateempresa =(Dataempresa, oResponse)=> {
   var sSQLUpdate = "UPDATE empresa SET last_updated = NOW() ";
   if(Dataempresa.hasOwnProperty('nombre_de_empresa')) {
     sSQLUpdate += " AND nombre_de_empresa = '" + Dataempresa.nombre_de_empresa + "' ";
@@ -93,7 +93,7 @@ sSQLUpdate = " WHERE idempresa = '" + Dataempresa.idempresa + "'";
     }
   });
 }
-function Readempresa(oResponse) {
+ Readempresa =(oResponse)=> {
   var sSQLRead = "SELECT * FROM empresa";
   oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
     if(oError) {
@@ -112,7 +112,7 @@ function Readempresa(oResponse) {
   });    
 }
 
-function Deleteempresa(oDataempresa, oResponse) {
+Deleteempresa =(oDataempresa, oResponse)=> {
   var sSQLDelete = "DELETE FROM empresa WHERE idempresa = '" + oDataempresa.idempresa + "'";
   oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
     if(oErrDelete) {

@@ -73,7 +73,6 @@ Updateempresa = (Dataempresa, oResponse) => {
     sSQLUpdate += " AND direccion_en_link = '" + Dataempresa.direccion_en_link + "' ";    
   }    
   sSQLUpdate = " WHERE idempresa = '" + Dataempresa.idempresa + "'";
-}
 if(Dataempresa.hasOwnProperty('hora_de_apertura')) {
   sSQLUpdate += " AND hora_de_apertura = '" + Dataempresa.hora_de_apertura + "' ";    
 }
@@ -99,7 +98,7 @@ sSQLUpdate = " WHERE idempresa = '" + Dataempresa.idempresa + "'";
     }
   });
 }
-function Readempresa(oResponse) {
+Readempresa =(oResponse)=> {
   var sSQLRead = "SELECT * FROM empresa";
   oMyConnection.query(sSQLRead, function(oError, oRows, oCols) {
     if(oError) {
@@ -118,7 +117,7 @@ function Readempresa(oResponse) {
   });    
 }
 
-function Deleteempresa(oDataempresa, oResponse) {
+Deleteempresa =(oDataempresa, oResponse) => {
   var sSQLDelete = "DELETE FROM empresa WHERE idempresa = '" + oDataempresa.idempresa + "'";
   oMyConnection.query(sSQLDelete, function(oErrDelete, oRowsDelete, oColsDelete) {
     if(oErrDelete) {
@@ -192,4 +191,4 @@ empresa.post('/empresas/salones', function(oReq, oRes) {
 });
 empresa.listen(3000, function(oReq, oRes) {
   console.log("Servicios para empresa corriendo en puerto 3000");   
-});
+})}}
